@@ -39,7 +39,48 @@ python -m pygame.examples.aliens
 
 This should display _something_ like this:
 
-![pygame-aliens-example](./images/pygame-alien-example.png).
+![pygame-aliens-example](./images/pygame-alien-example.png)
 
 Now you are on the right track :smile:
 
+Project structure looks like this, but you can modify it to match your needs or extend it:\
+
+```plain
+.
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+├── assets
+│   ├── sounds
+│   │   └── laser.wav
+│   └── sprites
+│       ├── asteroid.png
+│       ├── bullet.png
+│       ├── space.png
+│       └── spaceship.png
+├── game
+│   ├── __init__.py
+│   ├── models
+│   │   ├── __init__.py
+│   │   ├── asteroid.py
+│   │   ├── bullet.py
+│   │   └── spaceship.py
+│   ├── space_rocks.py
+│   └── utils
+│       ├── asset_utils.py
+│       └── game_utls.py
+└── images
+    └── pygame-alien-example.png
+```
+
+> Note that this setup is to make it easier to read & navigate, feel free to make it suit your needs
+
+## Running the game
+
+Once all the above is setup correctly, all that is left, is running the game. That's achieved with:
+
+```bash
+python game
+```
+
+> That should be it
