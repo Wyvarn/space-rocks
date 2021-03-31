@@ -1,4 +1,5 @@
 import pygame
+from utils.asset_utils import load_sprite
 
 class SpaceRocks:
     """
@@ -8,6 +9,7 @@ class SpaceRocks:
     def __init__(self):
         self._init_game()
         self.screen = pygame.display.set_mode((800, 600))
+        self.background = load_sprite("space", False)
     
     def _init_game(self):
         pygame.init()
@@ -57,5 +59,40 @@ class SpaceRocks:
         this method is called on every frame to update the display. Because of this, the screen needs to be filled with color every frame, 
         as the method will clear the contents generated during the previous frame.
         """
-        self.screen.fill((0,0, 255))
+        # use this if you want to fill the background with a color
+        # self.screen.fill((0,0, 255))
+        
+        # this takes in the surface to draw on & the x,y coordinates to draw on
+        # In Pygame, the coordinate system starts in the top-left corner. 
+        # The x-axis goes from left to right, and the y-axis goes from top to bottom
+        #     -------------> x
+        #     ________________________
+        #  | |                        |
+        #  | |                        |
+        #  | |                        |
+        #  | |                        |
+        #  Y |                        |
+        #    |________________________|
+        #
+        # The UP vector, pointing upwards, will have a negative y-coordinate.
+        # The coordinates passed to blit() are given as two values: X and Y. 
+        # 
+        # They represent the point where the top-left corner of the surface will be located after the operation
+        #     ________________________
+        #    |         | Big Surface  |
+        #    |         |              |
+        #    |         | Y            |
+        #    | ----> X  ______        |
+        #    |         |      |       | 
+        #    |         |      |       | 
+        #    |         |______|       | 
+        #    |        Small surface   |
+        #    |________________________|
+        # 
+        # The top-left corner is moved by the blit coordinates to calculate the correct position.
+        # In this case, the new background has the same size as the screen (800 × 600 pixels), 
+        # so the coordinates will be (0, 0), representing the top-left corner of the screen. 
+        # That way, the background image will cover the entire screen.
+        
+        self.screen.blit(self.background, (0,0))
         pygame.display.flip()
