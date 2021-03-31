@@ -31,7 +31,14 @@ class SpaceRocks:
             self._draw()
 
     def _handle_input(self):
-        pass
+        # in each event loop in the game, we get the current event and perform actions based on the event.
+        # pygame.event.get() allows us to get events in each frame of the game.
+        # These can be used to process any type of event. In this case we exit the game if the user process the
+        # ESC button on their keyboard or they exit by closing the game, the X button in the window or pressing
+        # ALT + F4 on Windows or Linux or Cmd+W on MacOS
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+                quit()
 
     def _game_engine(self):
         """
