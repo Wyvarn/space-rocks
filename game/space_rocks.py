@@ -34,8 +34,21 @@ class SpaceRocks:
         pass
 
     def _game_engine(self):
+        """
+        Handles the game logic
+        """
         pass
 
     def _draw(self):
+        """
+        Draws the content on the screen. It is called on every frame to draw the content on the screen.
+        self.screen.fill takes a tuple with three values, representing three base colors: red, green, and blue. 
+        Each color value ranges between 0 and 255, representing its intensity.
+        therefore a tuple of (0, 0, 255) means that the color will consist only of blue, with no traces of red or green
+
+        pygame.display.flip() updates the content of the screen. Because the game will eventually display moving objects, 
+        this method is called on every frame to update the display. Because of this, the screen needs to be filled with color every frame, 
+        as the method will clear the contents generated during the previous frame.
+        """
         self.screen.fill((0,0, 255))
         pygame.display.flip()
