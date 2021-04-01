@@ -1,5 +1,6 @@
 import pygame
 from utils.asset_utils import load_sprite
+from models.spaceship import Spaceship
 
 
 class SpaceRocks:
@@ -18,6 +19,7 @@ class SpaceRocks:
         self.screen = pygame.display.set_mode((800, 600))
         self.background = load_sprite("space", False)
         self.clock = pygame.time.Clock()
+        self.spaceship = Spaceship((400, 300))
 
     def _init_game(self):
         pygame.init()
@@ -55,7 +57,7 @@ class SpaceRocks:
         """
         Handles the game logic
         """
-        pass
+        self.spaceship.move()
 
     def _draw(self):
         """

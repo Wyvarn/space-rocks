@@ -14,14 +14,14 @@ class GameObject:
 
     """
 
-    def __init__(self, position: tuple, sprite, velocity: tuple):
+    def __init__(self, position: tuple, sprite, velocity):
         """
         Initializes a game object
         :param position: A point in the center of object on the 2D scree
         :type position tuple
         :param sprite: an image used to display the object
         :param velocity: a value used for movement
-        :type velocity tuple
+        :type velocity tuple or Vector
         radius A value representing the collision zone around the object’s position
         """
         self.position = Vector2(position)
@@ -51,7 +51,7 @@ class GameObject:
         # Pygame makes manipulating vectors straightforward, allowing you to add them like numbers
         self.position = self.position + self.velocity
 
-    def collides_with(self, other: GameObject) -> bool:
+    def collides_with(self, other) -> bool:
         """
         This is used to detect collisions with other objects
         :param other: Other game object
