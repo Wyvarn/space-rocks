@@ -1,20 +1,28 @@
 import pygame
 from utils.asset_utils import load_sprite
 
+
 class SpaceRocks:
     """
     Defines our game
     """
 
     def __init__(self):
+        """
+        Initialize the game
+        :ivar clock: This allows the speed of the game to be controlled and made constant across all processors &
+        machines. This allows us to run with a fixed FPS(Frames Per Second) avoiding a situation where the game is
+        harder on some machines & easier on others because the speed of objects is different.
+        """
         self._init_game()
         self.screen = pygame.display.set_mode((800, 600))
         self.background = load_sprite("space", False)
-    
+        self.clock = pygame.time.Clock()
+
     def _init_game(self):
         pygame.init()
         pygame.display.set_caption("Space Rocks")
-    
+
     def start_game(self):
         """
         This will start the game.
@@ -22,7 +30,8 @@ class SpaceRocks:
         Performs:
 
         1. input handling. Inputs is gathered & handled here, button presses, mouse movements
-        2. game engine. Game mechanics/logic/engine. Rules of physics are applied, collisions are detected and handled, AI does its thing, etc.
+        2. game engine. Game mechanics/logic/engine. Rules of physics are applied, collisions are detected and handled,
+        AI does its thing, etc.
         This part is also responsible for checking if the player has won or lost the game.
         3. drawing. If the game hasn’t ended yet, then this is where the frame will be drawn on screen. 
         It will include all the items that are currently in the game and are visible to the player.
@@ -55,13 +64,14 @@ class SpaceRocks:
         Each color value ranges between 0 and 255, representing its intensity.
         therefore a tuple of (0, 0, 255) means that the color will consist only of blue, with no traces of red or green
 
-        pygame.display.flip() updates the content of the screen. Because the game will eventually display moving objects, 
-        this method is called on every frame to update the display. Because of this, the screen needs to be filled with color every frame, 
+        pygame.display.flip() updates the content of the screen. Because the game will eventually display moving objects
+        this method is called on every frame to update the display. Because of this, the screen needs to be filled with
+        color every frame,
         as the method will clear the contents generated during the previous frame.
         """
         # use this if you want to fill the background with a color
         # self.screen.fill((0,0, 255))
-        
+
         # this takes in the surface to draw on & the x,y coordinates to draw on
         # In Pygame, the coordinate system starts in the top-left corner. 
         # The x-axis goes from left to right, and the y-axis goes from top to bottom
@@ -93,6 +103,10 @@ class SpaceRocks:
         # In this case, the new background has the same size as the screen (800 × 600 pixels), 
         # so the coordinates will be (0, 0), representing the top-left corner of the screen. 
         # That way, the background image will cover the entire screen.
-        
-        self.screen.blit(self.background, (0,0))
+
+        self.screen.blit(self.background, (0, 0))
         pygame.display.flip()
+
+        # This method will wait long enough to match the desired FPS value, passed as an argument.
+        # will control the game and ensure that the game will run at a frame rate of 60 FPS
+        self.clock.tick(60)

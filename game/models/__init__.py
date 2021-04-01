@@ -6,18 +6,22 @@ class GameObject:
     This represents a typical object in the game & will encapsulate all generic
     behaviour of all objects. Other classes will inherit this & extend its behaviour
 
-    This uses Vectors, which are similar to tuples. In a 2D world, vectors are represented by two values indicating x- and y-coordinates. 
+    This uses Vectors, which are similar to tuples. In a 2D world, vectors are represented by two values indicating x-
+    and y-coordinates.
     These coordinates can point to a position, but they can also represent motion or acceleration in a given direction. 
     Vectors can be added, subtracted, or even multiplied to quickly update the position of a sprite. 
     Reference on this can be found here https://www.intmath.com/vectors/3-vectors-2-dimensions.php
+
     """
 
     def __init__(self, position: tuple, sprite, velocity: tuple):
         """
         Initializes a game object
-        :param position: A point in the centor of object on the 2D scree
+        :param position: A point in the center of object on the 2D scree
+        :type position tuple
         :param sprite: an image used to display the object
         :param velocity: a value used for movement
+        :type velocity tuple
         radius A value representing the collision zone around the object’s position
         """
         self.position = Vector2(position)
