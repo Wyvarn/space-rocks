@@ -10,10 +10,15 @@ UP = Vector2(0, -1)
 class Spaceship(GameObject):
     """
     Represents a spaceship
+
+    In this game, when you press Up, the spaceship’s speed will increase. When you release the key, the spaceship will
+    maintain its current speed but should no longer accelerate. So in order to slow it down, you’ll have to turn the
+    spaceship around and press Up again.
+
     MANEUVERABILITY: determines how fast your spaceship can rotate. This value represents an angle in degrees by which
     your spaceship’s direction can rotate each frame. Using a larger number will rotate the spaceship faster, while a
     smaller number will allow more granular control over the rotation.
-    ACCELERATION
+    ACCELERATION: constant number describing how fast the spaceship can speed up each frame.
     BULLET_SPEED
     """
     MANEUVERABILITY = 3
@@ -68,3 +73,12 @@ class Spaceship(GameObject):
 
         # uses the newly calculated blit position to put the image on the screen.
         surface.blit(rotated_surface, blit_position)
+
+    def accelerate(self):
+        """
+        You can calculate the change in velocity by multiplying the direction vector by the ACCELERATION value and
+        adding the result to the current velocity. This happens only when the engine is on—that is, when the player
+        presses Up. The new position of the spaceship is calculated by adding the current velocity to the current
+        position of the spaceship. This happens each frame, regardless of the engine status.
+        """
+        self.velocity += self.direction * self.ACCELERATION
