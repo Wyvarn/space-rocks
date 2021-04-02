@@ -1,5 +1,7 @@
 from pygame.math import Vector2
 
+from game.utils.game_utils import wrap_position
+
 
 class GameObject:
     """
@@ -42,14 +44,14 @@ class GameObject:
         # uses the newly calculated blit position to put the object’s sprite in a correct place on the given surface.
         surface.blit(self.sprite, blit_position)
 
-    def move(self):
+    def move(self, surface):
         """
         Updates the position of the object
 
         """
         # adds the velocity to the position and gets an updated position vector as a result. 
         # Pygame makes manipulating vectors straightforward, allowing you to add them like numbers
-        self.position = self.position + self.velocity
+        self.position = wrap_position(self.position + self.velocity, surface)
 
     def collides_with(self, other) -> bool:
         """

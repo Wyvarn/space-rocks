@@ -67,7 +67,7 @@ class SpaceRocks:
         """
         Handles the game logic
         """
-        self.spaceship.move()
+        self.spaceship.move(self.screen)
 
     def _draw(self):
         """

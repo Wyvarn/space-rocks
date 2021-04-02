@@ -1,6 +1,7 @@
 from pygame.image import load
 
-def load_sprite(name: str, with_alpha: bool =True):
+
+def load_sprite(name: str, with_alpha: bool = True):
     """
     Loads a sprite given the name. This will build a path to the sprite and load it
 
@@ -15,7 +16,8 @@ def load_sprite(name: str, with_alpha: bool =True):
     loaded_sprite = load(path)
 
     # converts the image to either be transparent or not.
-    # Generally, you could just use convert_alpha() for all types of images since it can also handle an image without transparent pixels. 
+    # Generally, you could just use convert_alpha() for all types of images since it can also handle an image without
+    # transparent pixels.
     # However, drawing transparent images is a bit slower than drawing nontransparent ones.
     if with_alpha:
         return loaded_sprite.convert_alpha()
