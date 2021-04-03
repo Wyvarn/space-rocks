@@ -71,13 +71,14 @@ class SpaceRocks:
 
         is_key_pressed = pygame.key.get_pressed()
 
-        if is_key_pressed[pygame.K_RIGHT]:
-            self.spaceship.rotate(clockwise=True)
-        elif is_key_pressed[pygame.K_LEFT]:
-            self.spaceship.rotate(clockwise=False)
+        if self.spaceship:
+            if is_key_pressed[pygame.K_RIGHT]:
+                self.spaceship.rotate(clockwise=True)
+            elif is_key_pressed[pygame.K_LEFT]:
+                self.spaceship.rotate(clockwise=False)
 
-        if is_key_pressed[pygame.K_UP]:
-            self.spaceship.accelerate()
+            if is_key_pressed[pygame.K_UP]:
+                self.spaceship.accelerate()
 
     def _game_engine(self):
         """
@@ -86,6 +87,15 @@ class SpaceRocks:
 
         for game_object in self._get_game_objects():
             game_object.move(self.screen)
+
+        if self.spaceship:
+            for asteroid in self.asteroids:
+                # If any of the asteroids collides with the spaceship, then the spaceship is destroyed.
+                # this setting is represented self.spaceship to None.
+                if asteroid.collides_with(self.spaceship):
+                    self.spaceship = None
+                    self.message = "You lost!"
+                    break
 
         self.spaceship.move(self.screen)
 
