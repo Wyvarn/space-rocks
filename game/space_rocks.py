@@ -1,12 +1,17 @@
 import pygame
 from utils.asset_utils import load_sprite
+from utils.game_utils import get_random_position
 from models.spaceship import Spaceship
+from models.asteroid import Asteroid
 
 
 class SpaceRocks:
     """
     Defines our game
+    MIN_ASTEROID_DISTANCE: constant representing an area that has to remain empty.A value of 250 pixels should be enough
     """
+
+    MIN_ASTEROID_DISTANCE = 250
 
     def __init__(self):
         """
@@ -20,6 +25,17 @@ class SpaceRocks:
         self.background = load_sprite("space", False)
         self.clock = pygame.time.Clock()
         self.spaceship = Spaceship((400, 300))
+        self.asteroids = []
+
+        for _ in range(6):
+            while True:
+                position = get_random_position(self.screen)
+
+                # if the position of an asteroid is larger than the minimal asteroid distance.
+                if position.distance_to(self.spaceship.position) > self.MIN_ASTEROID_DISTANCE:
+                    break
+
+                self.asteroids.append(Asteroid(position))
 
     def _init_game(self):
         pygame.init()
@@ -67,6 +83,10 @@ class SpaceRocks:
         """
         Handles the game logic
         """
+
+        for game_object in self._get_game_objects():
+            game_object.move(self.screen)
+
         self.spaceship.move(self.screen)
 
     def _draw(self):
@@ -117,8 +137,24 @@ class SpaceRocks:
         # That way, the background image will cover the entire screen.
 
         self.screen.blit(self.background, (0, 0))
+
+        for game_object in self._get_game_objects():
+            game_object.move(self.screen)
+
         pygame.display.flip()
 
         # This method will wait long enough to match the desired FPS value, passed as an argument.
         # will control the game and ensure that the game will run at a frame rate of 60 FPS
         self.clock.tick(60)
+
+    def _get_game_objects(self):
+        """
+        Used by the drawing and moving logic which can later be used to introduce new types of game objects and modify
+        only this single method, or you can exclude some objects from this group if necessary.
+        """
+        game_objects = [*self.asteroids, *self.bullets]
+
+        if self.spaceship:
+            game_objects.append(self.spaceship)
+
+        return game_objects
