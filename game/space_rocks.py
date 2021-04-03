@@ -1,6 +1,6 @@
 import pygame
 from utils.asset_utils import load_sprite
-from utils.game_utils import get_random_position
+from utils.game_utils import get_random_position, print_text
 from models.spaceship import Spaceship
 from models.asteroid import Asteroid
 
@@ -33,6 +33,8 @@ class SpaceRocks:
         self._init_game()
         self.screen = pygame.display.set_mode((800, 600))
         self.background = load_sprite("space", False)
+        self.font = pygame.font.Font(None, 64)
+        self.message = ""
         self.clock = pygame.time.Clock()
         self.asteroids = []
         self.bullets = []
@@ -46,7 +48,7 @@ class SpaceRocks:
                 if position.distance_to(self.spaceship.position) > self.MIN_ASTEROID_DISTANCE:
                     break
 
-                self.asteroids.append(Asteroid(position))
+            self.asteroids.append(Asteroid(position))
 
     def _init_game(self):
         pygame.init()
@@ -127,6 +129,9 @@ class SpaceRocks:
             if not self.screen.get_rect().collidepoint(bullet.position):
                 self.bullets.remove(bullet)
 
+        if not self.asteroids and self.spaceship:
+            self.message = "You won!"
+
     def _draw(self):
         """
         Draws the content on the screen. It is called on every frame to draw the content on the screen.
@@ -178,6 +183,9 @@ class SpaceRocks:
 
         for game_object in self._get_game_objects():
             game_object.move(self.screen)
+
+        if self.message:
+            print_text(self.screen, self.message, self.font)
 
         pygame.display.flip()
 
