@@ -1,5 +1,5 @@
 from . import GameObject
-from utils import load_sprite, get_random_velocity
+from .utils import load_sprite, get_random_velocity
 
 
 class Asteroid(GameObject):

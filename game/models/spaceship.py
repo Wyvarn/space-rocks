@@ -1,8 +1,8 @@
 from pygame.math import Vector2
 from pygame.transform import rotozoom
 from . import GameObject
-from bullet import Bullet
-from utils import load_sprite
+from .bullet import Bullet
+from .utils import load_sprite
 
 # Pygame’s y-axis goes from top to bottom, so a negative value actually points upwards
 UP = Vector2(0, -1)

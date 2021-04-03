@@ -110,7 +110,22 @@ class SpaceRocks:
                     self.message = "You lost!"
                     break
 
-        self.spaceship.move(self.screen)
+        # Notice that instead of using the original list, self.bullets, we create a copy of it using self.bullets[:]
+        # That’s because removing elements from a list while iterating over it can cause errors.
+        for bullet in self.bullets[:]:
+            for asteroid in self.asteroids[:]:
+                if asteroid.collides_with(bullet):
+                    self.asteroids.remove(asteroid)
+                    self.bullets.remove(bullet)
+                    break
+
+        for bullet in self.bullets[:]:
+            # Surfaces in Pygame have a get_rect() method that returns a rectangle representing their area.
+            # That rectangle, in turn, has a collidepoint() method that returns True if a point is included in the
+            # rectangle and False otherwise. Using these two methods, you can check if the bullet has left the screen,
+            # and if so, remove it from the list.
+            if not self.screen.get_rect().collidepoint(bullet.position):
+                self.bullets.remove(bullet)
 
     def _draw(self):
         """

@@ -1,6 +1,6 @@
 from pygame.math import Vector2
 
-from game.utils.game_utils import wrap_position
+from .utils import wrap_position
 
 
 class GameObject:

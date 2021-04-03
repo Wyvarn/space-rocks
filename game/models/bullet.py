@@ -1,6 +1,6 @@
 from . import GameObject
 
-from utils import load_sprite
+from .utils import load_sprite
 
 
 class Bullet(GameObject):
