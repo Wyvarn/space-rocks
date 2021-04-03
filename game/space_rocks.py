@@ -19,13 +19,24 @@ class SpaceRocks:
         :ivar clock: This allows the speed of the game to be controlled and made constant across all processors &
         machines. This allows us to run with a fixed FPS(Frames Per Second) avoiding a situation where the game is
         harder on some machines & easier on others because the speed of objects is different.
+
+        Bullets are stored in the main game object, represented by the SpaceRocks class. However, the shooting logic
+        should be determined by the spaceship. It’s the spaceship that knows how to create a new bullet,
+        but it’s the game that stores and later animates the bullets. The Spaceship class needs a way to inform the S
+        paceRocks class that a bullet has been created and should be tracked.
+
+        To fix this, a callback function is added to the Spaceship class. That function will be provided by the
+        SpaceRocks class when the spaceship is initialized. Every time the spaceship creates a bullet, it will
+        initialize a Bullet object and then call the callback. The callback will add the bullet to the list of all
+        bullets stored by the game.
         """
         self._init_game()
         self.screen = pygame.display.set_mode((800, 600))
         self.background = load_sprite("space", False)
         self.clock = pygame.time.Clock()
-        self.spaceship = Spaceship((400, 300))
         self.asteroids = []
+        self.bullets = []
+        self.spaceship = Spaceship((400, 300), self.bullets.append)
 
         for _ in range(6):
             while True:
@@ -68,6 +79,8 @@ class SpaceRocks:
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 quit()
+            elif self.spaceship and event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                self.spaceship.shoot()
 
         is_key_pressed = pygame.key.get_pressed()
 

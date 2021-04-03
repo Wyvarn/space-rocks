@@ -1,6 +1,7 @@
 from pygame.math import Vector2
 from pygame.transform import rotozoom
 from . import GameObject
+from bullet import Bullet
 from utils import load_sprite
 
 # Pygame’s y-axis goes from top to bottom, so a negative value actually points upwards
@@ -25,7 +26,8 @@ class Spaceship(GameObject):
     ACCELERATION = 0.25
     BULLET_SPEED = 3
 
-    def __init__(self, position: tuple):
+    def __init__(self, position: tuple, create_bullet_callback):
+        self.create_bullet = create_bullet_callback
         # Make a copy of the original UP vector
         self.direction = Vector2(UP)
         super().__init__(position, load_sprite("spaceship"), Vector2(0))
@@ -82,3 +84,19 @@ class Spaceship(GameObject):
         position of the spaceship. This happens each frame, regardless of the engine status.
         """
         self.velocity += self.direction * self.ACCELERATION
+
+    def shoot(self):
+        """
+        Handles shooting of the spaceship.
+
+        You start by calculating the velocity of the bullet. The bullet is always shot forward,
+        so you use the direction of the spaceship multiplied by the speed of the bullet. Because the spaceship doesn’t
+        necessarily stand still, you add its velocity to the velocity of the bullet. That way, you can create high-speed
+        bullets if the spaceship is moving very fast.
+
+        Then an instance of the Bullet class is created at the same location as the spaceship, using the velocity that
+        was just calculated. Finally, the bullet is added to all the bullets in the game by using the callback method.
+        """
+        bullet_velocity = self.direction * self.BULLET_SPEED + self.velocity
+        bullet = Bullet(self.position, bullet_velocity)
+        self.create_bullet(bullet)
