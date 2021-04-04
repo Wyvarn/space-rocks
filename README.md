@@ -97,3 +97,13 @@ The game should look like this:
 
 ![spacerocks-lost](./images/spacerocks-lost.png)
 > When you lost a game
+
+## Contributing
+
+Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the process for
+submitting pull requests to us. Also read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of
+conduct.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
