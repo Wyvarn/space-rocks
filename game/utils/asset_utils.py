@@ -1,4 +1,5 @@
 from pygame.image import load
+from pygame.mixer import Sound
 
 
 def load_sprite(name: str, with_alpha: bool = True):
@@ -23,3 +24,8 @@ def load_sprite(name: str, with_alpha: bool = True):
         return loaded_sprite.convert_alpha()
     else:
         return loaded_sprite.convert()
+
+
+def load_sound(name):
+    path = f"assets/sounds/{name}.wav"
+    return Sound(path)

@@ -1,6 +1,6 @@
 import pygame
-from utils.asset_utils import load_sprite
-from utils.game_utils import get_random_position, print_text
+from utils.asset_utils import load_sprite, load_sound
+from utils.game_utils import get_random_position, print_text, get_random_velocity
 from models.spaceship import Spaceship
 from models.asteroid import Asteroid
 
@@ -38,7 +38,9 @@ class SpaceRocks:
         self.clock = pygame.time.Clock()
         self.asteroids = []
         self.bullets = []
-        self.spaceship = Spaceship((400, 300), self.bullets.append)
+        self.spaceship = Spaceship((400, 300), self.bullets.append, sprite=load_sprite("spaceship"),
+                                   bullet_sprite=load_sprite("bullet"),
+                                   laser_sound=load_sound("laser"))
 
         for _ in range(6):
             while True:
@@ -48,7 +50,9 @@ class SpaceRocks:
                 if position.distance_to(self.spaceship.position) > self.MIN_ASTEROID_DISTANCE:
                     break
 
-            self.asteroids.append(Asteroid(position, self.asteroids.append))
+            self.asteroids.append(
+                Asteroid(position=position, sprite=load_sprite("asteroid"), create_asteroid=self.asteroids.append,
+                         random_velocity=get_random_velocity(1, 3)))
 
     def _init_game(self):
         pygame.init()

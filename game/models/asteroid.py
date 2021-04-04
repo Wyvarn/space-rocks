@@ -1,6 +1,5 @@
 from pygame.transform import rotozoom
 from . import GameObject
-from .utils import load_sprite, get_random_velocity
 
 
 class Asteroid(GameObject):
@@ -12,7 +11,7 @@ class Asteroid(GameObject):
     game is initialized. However, the velocity is random for every asteroid, so you set it in the constructor here.
     """
 
-    def __init__(self, position, create_asteroid, size=3):
+    def __init__(self, position, sprite, create_asteroid, random_velocity, size=3):
         """
         :param position: Position of the Asteroid
         :param create_asteroid: Callback to create an asteroid when this asteroid is split up. it should be split up
@@ -31,11 +30,11 @@ class Asteroid(GameObject):
             1: 0.25,
         }
         scale = size_to_scale[size]
-        sprite = rotozoom(load_sprite("asteroid"), 0, scale)
+        sprite = rotozoom(sprite, 0, scale)
 
         # Notice the get_random_velocity uses the minimum value of 1,this is because the asteroid should always move
         # at least a bit.
-        super().__init__(position, sprite, get_random_velocity(1, 3))
+        super().__init__(position, sprite, random_velocity)
 
     def split(self):
         """
@@ -45,5 +44,5 @@ class Asteroid(GameObject):
         """
         if self.size > 1:
             for _ in range(2):
-                asteroid = Asteroid(self.position, self.create_asteroid, self.size - 1)
+                asteroid = Asteroid(self.position, self.sprite, self.create_asteroid, self.size - 1)
                 self.create_asteroid(asteroid)

@@ -2,7 +2,6 @@ import random
 
 from pygame import Color
 from pygame.math import Vector2
-from pygame.mixer import Sound
 
 
 def wrap_position(position: tuple, surface):

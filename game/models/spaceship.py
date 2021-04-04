@@ -2,7 +2,6 @@ from pygame.math import Vector2
 from pygame.transform import rotozoom
 from . import GameObject
 from .bullet import Bullet
-from .utils import load_sprite
 
 # Pygame’s y-axis goes from top to bottom, so a negative value actually points upwards
 UP = Vector2(0, -1)
@@ -26,11 +25,13 @@ class Spaceship(GameObject):
     ACCELERATION = 0.25
     BULLET_SPEED = 3
 
-    def __init__(self, position: tuple, create_bullet_callback):
+    def __init__(self, position: tuple, create_bullet_callback, sprite, bullet_sprite, laser_sound):
         self.create_bullet = create_bullet_callback
+        self.laser_sound = laser_sound
+        self.bullet_sprite = bullet_sprite
         # Make a copy of the original UP vector
         self.direction = Vector2(UP)
-        super().__init__(position, load_sprite("spaceship"), Vector2(0))
+        super().__init__(position, sprite, Vector2(0))
 
     def rotate(self, clockwise=True):
         """
@@ -98,5 +99,6 @@ class Spaceship(GameObject):
         was just calculated. Finally, the bullet is added to all the bullets in the game by using the callback method.
         """
         bullet_velocity = self.direction * self.BULLET_SPEED + self.velocity
-        bullet = Bullet(self.position, bullet_velocity)
+        bullet = Bullet(position=self.position, sprite=self.bullet_sprite, velocity=bullet_velocity)
         self.create_bullet(bullet)
+        self.laser_sound.play()
