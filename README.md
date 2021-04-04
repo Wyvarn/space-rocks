@@ -1,12 +1,17 @@
 # Space Rocks
 
-A simple space game made with Python and Pygame. Game inspiration comes from [here](https://www.youtube.com/watch?v=WYSupJ5r2zo)
+A simple space game made with Python and Pygame. Game inspiration comes
+from [here](https://www.youtube.com/watch?v=WYSupJ5r2zo)
 
 ## Prerequisits
 
-This being a Python Game, Python essentially needs to be installed. preferrably Python 3.8 & up, but any version of Python 3.+ should work just fine.
+This being a Python Game, Python essentially needs to be installed. preferrably Python 3.8 & up, but any version of
+Python 3.+ should work just fine.
 
-Once you have Python installed, the installation of dependencies should be straightforward. You can either use [Pipenv](https://pypi.org/project/pipenv/) or use [Pip](https://pypi.org/project/pip/) as your preferred dependency manager, for this project, pipenv has been picked. Do read on these 2 as outlined in the links provided to avoid any confusion.
+Once you have Python installed, the installation of dependencies should be straightforward. You can either
+use [Pipenv](https://pypi.org/project/pipenv/) or use [Pip](https://pypi.org/project/pip/) as your preferred dependency
+manager, for this project, pipenv has been picked. Do read on these 2 as outlined in the links provided to avoid any
+confusion.
 
 ## Installation
 
@@ -84,3 +89,11 @@ python game
 ```
 
 > That should be it
+
+The game should look like this:
+
+![spacerocks](./images/spacerocks.png)
+> When starting the game
+
+![spacerocks-lost](./images/spacerocks-lost.png)
+> When you lost a game
