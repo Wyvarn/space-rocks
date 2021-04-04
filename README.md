@@ -1,5 +1,7 @@
 # Space Rocks
 
+
+
 A simple space game made with Python and Pygame. Game inspiration comes
 from [here](https://www.youtube.com/watch?v=WYSupJ5r2zo)
 
@@ -98,12 +100,34 @@ The game should look like this:
 ![spacerocks-lost](./images/spacerocks-lost.png)
 > When you lost a game
 
+## Deployment
+
+Deployment is really up to you, as this is a simply game :).
+
+## Built With
+
+* [Python](https://www.python.org/) - Programming language used
+* [Pygame](https://www.pygame.org/wiki/about) - Module used to writing Python Games
+* [Pipenv](https://pypi.org/project/pipenv/) - Dependency management
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the process for
-submitting pull requests to us. Also read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of
-conduct.
+submitting pull requests to us. Also read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see
+the [tags on this repository](https://github.com/Wyvarn/space-rocks/releases).
+
+## Authors
+
+* **Brian Lusina** - *Initial work* - [BrianLusina](https://github.com/BrianLusina)
+
+See also the list of [contributors](https://github.com/Wyvarn/space-rocks/graphs/contributors) who participated in this
+project.
+
