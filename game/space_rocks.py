@@ -48,7 +48,7 @@ class SpaceRocks:
                 if position.distance_to(self.spaceship.position) > self.MIN_ASTEROID_DISTANCE:
                     break
 
-            self.asteroids.append(Asteroid(position))
+            self.asteroids.append(Asteroid(position, self.asteroids.append))
 
     def _init_game(self):
         pygame.init()
@@ -119,6 +119,7 @@ class SpaceRocks:
                 if asteroid.collides_with(bullet):
                     self.asteroids.remove(asteroid)
                     self.bullets.remove(bullet)
+                    asteroid.split()
                     break
 
         for bullet in self.bullets[:]:
@@ -182,7 +183,7 @@ class SpaceRocks:
         self.screen.blit(self.background, (0, 0))
 
         for game_object in self._get_game_objects():
-            game_object.move(self.screen)
+            game_object.draw(self.screen)
 
         if self.message:
             print_text(self.screen, self.message, self.font)
